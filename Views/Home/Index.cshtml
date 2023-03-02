@@ -1,0 +1,82 @@
+﻿@using System.Drawing;
+
+@{
+    //string title = "Home page";
+    //string header = "Welcome to Home page";
+    //string date = DateTime.Now.ToLongDateString();
+    //int hour = DateTime.Now.Hour;
+
+    //List<string> users = new() { "Bob", "Joe", "Tim", "Sam" };
+
+    bool isYes = true;
+
+    //int Sum(int a, int b)
+    //{
+    //    return a + b;
+    //}
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>@ViewData["title"]</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <h1>@ViewData["header"]</h1>
+        <h2>Date now: @ViewBag.Date</h2>
+        @if (ViewBag.Hour <= 12)
+        {
+            <h3>Good morning</h3>
+        }
+        else if (ViewBag.Hour <= 17)
+        {
+            <h3>Good day</h3>
+        }
+        else
+        {
+            <h3>Good evening</h3>
+        }
+        <ul>
+        @*foreach (var user in (List<string>)ViewData["users"]!)*@
+        @foreach(var user in (List<string>)ViewBag.Users)
+        {
+            <li>@user</li>
+        }
+        </ul>
+        <p>
+            @if(isYes)
+            {
+                @:Yes
+            }
+            else
+            {
+                @:No
+            }
+        </p>
+
+        @functions
+        {
+        int Sum(int a, int b)
+        {
+            return a + b;
+        }
+
+        int Mult(int a, int b) => a * b;
+
+        }
+
+        @model List<string>
+        <h2>Users count: @Model.Count</h2>
+        <ol>
+            @foreach(var user in Model)
+            {
+                <li>@user</li>
+            }
+        </ol>
+        
+
+        <p>@Sum(10, 20)</p>
+        
+    </body>
+</html>
